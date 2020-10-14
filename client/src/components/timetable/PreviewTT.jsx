@@ -1,11 +1,10 @@
-import { Component } from 'react'
-import React from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import { deleteSection } from '../../redux/actions/UpdateTimeTable'
-import '../../styles/Timetable.css'
-import Card from '@material-ui/core/Card'
-const ntw = require('number-to-words')
+import { Component } from "react"
+import React from "react"
+import { connect } from "react-redux"
+import PropTypes from "prop-types"
+import { deleteSection } from "../../redux/actions/UpdateTimeTable"
+import "../../styles/Timetable.css"
+const ntw = require("number-to-words")
 class PreviewTT extends Component {
   constructor(props) {
     super(props)
@@ -14,45 +13,45 @@ class PreviewTT extends Component {
   }
   populateTimetable() {
     var gridList = [
-      ['Time', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-      ['Monday', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      ['Tuesday', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      ['Wednesday', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      ['Thursday', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      ['Friday', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      ['Saturday', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      ["Time", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+      ["Monday", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      ["Tuesday", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      ["Wednesday", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      ["Thursday", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      ["Friday", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      ["Saturday", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ]
 
     let Map = {}
-    Map['M'] = 1
-    Map['T'] = 2
-    Map['W'] = 3
-    Map['Th'] = 4
-    Map['F'] = 5
-    Map['S'] = 6
+    Map["M"] = 1
+    Map["T"] = 2
+    Map["W"] = 3
+    Map["Th"] = 4
+    Map["F"] = 5
+    Map["S"] = 6
 
     let divStyle = {}
-    var days = ['M', 'T', 'W', 'Th', 'F', 'S']
+    var days = ["M", "T", "W", "Th", "F", "S"]
     var hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
     var day, hour
     for (day of days) {
       for (hour of hours) {
         divStyle = {}
         let section = this.props.TimeTable[day][ntw.toWords(hour)]
-        let str = ''
+        let str = ""
         if (gridList[Map[day]][hour] === -1) {
           continue
         } else if (!section.courseCode) {
           str = (
             <div
               style={{
-                backgroundColor: '#black',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                backgroundColor: "#black",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              {' '}
+              {" "}
               <br></br> <br></br> <br></br>
             </div>
           )
@@ -99,11 +98,11 @@ class PreviewTT extends Component {
             <div
               key={[i, j].toString()}
               style={{
-                backgroundColor: '#222222',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'white',
+                backgroundColor: "#222222",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "white",
               }}
             >
               {gridList[i][j]}

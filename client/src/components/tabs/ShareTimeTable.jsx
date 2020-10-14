@@ -1,25 +1,25 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import Select from 'react-select'
-import { components } from 'react-select'
-import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
-import { makeStyles } from '@material-ui/core/styles'
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import Button from '@material-ui/core/Button'
-import axios from 'axios'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { useGetData } from 'use-axios-react'
-import '../../styles/ShareTT.css'
-import { editTT } from '../../redux/actions/UpdateTimeTable'
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
+import Select from "react-select"
+import { components } from "react-select"
+import Typography from "@material-ui/core/Typography"
+import Grid from "@material-ui/core/Grid"
+import { makeStyles } from "@material-ui/core/styles"
+import Card from "@material-ui/core/Card"
+import CardActions from "@material-ui/core/CardActions"
+import CardContent from "@material-ui/core/CardContent"
+import Button from "@material-ui/core/Button"
+import axios from "axios"
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
+import { useGetData } from "use-axios-react"
+import "../../styles/ShareTT.css"
+import { editTT } from "../../redux/actions/UpdateTimeTable"
 
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-    margin: '1vh',
+    margin: "1vh",
   },
   /*
   cardcontainer: {
@@ -28,12 +28,12 @@ const useStyles = makeStyles({
     overflow: 'auto',
   },*/
   content: {
-    margin: '1vh',
+    margin: "1vh",
   },
   bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)",
   },
   title: {
     fontSize: 14,
@@ -43,44 +43,44 @@ const useStyles = makeStyles({
   },
   grid: {
     flexGrow: 1,
-    maxWidth: '95vw',
-    maxHeight: '45vh',
-    overflow: 'auto',
+    maxWidth: "95vw",
+    maxHeight: "45vh",
+    overflow: "auto",
   },
 })
 
 const branches = [
-  { value: 'BIO', label: 'Biological Sciences' },
-  { value: 'CHE', label: 'Chemical Engineering' },
-  { value: 'CHEM', label: 'Chemistry' },
-  { value: 'CE', label: 'Civil Engineering' },
-  { value: 'CS', label: 'Computer Science' },
-  { value: 'ECO', label: 'Economics & Finance' },
-  { value: 'ECE', label: 'Electrical & Communication Engineering' },
-  { value: 'EEE', label: 'Electrical & Electronics Engineering' },
-  { value: 'INSTR', label: 'Electronics & Instrumentation Engineering' },
-  { value: 'MANU', label: 'Manufacturing Engineering' },
-  { value: 'MATH', label: 'Mathematics' },
-  { value: 'ME', label: 'Mechanical Engineering' },
-  { value: 'PHA', label: 'Pharmacy' },
-  { value: 'PHY', label: 'Physics' },
+  { value: "BIO", label: "Biological Sciences" },
+  { value: "CHE", label: "Chemical Engineering" },
+  { value: "CHEM", label: "Chemistry" },
+  { value: "CE", label: "Civil Engineering" },
+  { value: "CS", label: "Computer Science" },
+  { value: "ECO", label: "Economics & Finance" },
+  { value: "ECE", label: "Electrical & Communication Engineering" },
+  { value: "EEE", label: "Electrical & Electronics Engineering" },
+  { value: "INSTR", label: "Electronics & Instrumentation Engineering" },
+  { value: "MANU", label: "Manufacturing Engineering" },
+  { value: "MATH", label: "Mathematics" },
+  { value: "ME", label: "Mechanical Engineering" },
+  { value: "PHA", label: "Pharmacy" },
+  { value: "PHY", label: "Physics" },
 ]
 const years = [
-  { value: '1', label: 'First' },
-  { value: '2', label: 'Second' },
-  { value: '3', label: 'Third' },
-  { value: '4', label: 'Fourth' },
-  { value: '5', label: 'Fifth' },
+  { value: "1", label: "First" },
+  { value: "2", label: "Second" },
+  { value: "3", label: "Third" },
+  { value: "4", label: "Fourth" },
+  { value: "5", label: "Fifth" },
 ]
 
 const ShareTimeTable = (props) => {
   const [formData, setFormData] = useState({
     branch: props.user
       ? branches.filter((branch) =>
-          props.user['branch'].includes(branch['value'])
+          props.user["branch"].includes(branch["value"])
         )
       : [],
-    year: props.user ? props.user.year.toString() : '',
+    year: props.user ? props.user.year.toString() : "",
     TTs: [],
   })
 
@@ -91,11 +91,11 @@ const ShareTimeTable = (props) => {
     try {
       let br = []
       branch.forEach((item) => {
-        br.push(item['value'])
+        br.push(item["value"])
       })
 
       axios
-        .get('/api/timetable/viewshared', {
+        .get("/api/timetable/viewshared", {
           params: {
             branch: br,
             year: year,
@@ -105,9 +105,9 @@ const ShareTimeTable = (props) => {
           if (resp.status === 422 || resp.data.length === 0) {
             TTData = []
           } else if (resp.status !== 200) {
-            throw new Error('Could not submit query')
+            throw new Error("Could not submit query")
           } else {
-            TTData = JSON.parse(JSON.stringify(resp['data']))
+            TTData = JSON.parse(JSON.stringify(resp["data"]))
           }
           setFormData({ ...formData, TTs: TTData })
         })
@@ -132,9 +132,9 @@ const ShareTimeTable = (props) => {
   const onSubmit = async (e) => {
     e.preventDefault()
     if (!branch || branch.length === 0) {
-      window.alert('Please enter your branch')
-    } else if (year.value === '' || isNaN(year.value)) {
-      window.alert('Please enter your year')
+      window.alert("Please enter your branch")
+    } else if (year.value === "" || isNaN(year.value)) {
+      window.alert("Please enter your year")
     } else {
       submitToMongo(branch, year.value)
     }
@@ -157,13 +157,13 @@ const ShareTimeTable = (props) => {
   const isValidNewOption = (inputValue, selectValue) =>
     inputValue.length > 0 && selectValue.length < 5
 
-  const [, loading] = useGetData('/api/timetable/viewshared')
+  const [, loading] = useGetData("/api/timetable/viewshared")
   const classes = useStyles()
   return (
     <>
       <div className={classes.content}>
-        <h4>Publicly Shared Timetables</h4>
-        <h5>Please Select your Branch and year below:</h5>
+        <h4 align="center">Publicly Shared Timetables</h4>
+        <h5 align="center">Please Select your Branch and year below:</h5>
         <form className="form-whole" onSubmit={onSubmit}>
           <div className="branch-year-container">
             <Select
@@ -189,6 +189,7 @@ const ShareTimeTable = (props) => {
             initialYear={year}
           ></YearSelector> */}
           </div>
+          <br></br>
           <input type="submit" className="btn btn-primary" value="Go" />
           <br></br>
         </form>
@@ -211,10 +212,10 @@ const ShareTimeTable = (props) => {
                           color="textSecondary"
                           component="p"
                         >
-                          Date: {itemc.date.substr(0, itemc.date.indexOf('T'))}
+                          Date: {itemc.date.substr(0, itemc.date.indexOf("T"))}
                           <br />
-                          {'Time: '}{' '}
-                          {itemc.date.substr(itemc.date.indexOf('T') + 1, 9)}
+                          {"Time: "}{" "}
+                          {itemc.date.substr(itemc.date.indexOf("T") + 1, 9)}
                         </Typography>
                       </CardContent>
                       <CardActions>

@@ -5,10 +5,10 @@
   max-width: 720px;
   gap: 10px;
 }
-
 .half-width {
   width: 50%;
   white-space: nowrap;
+  float: left;
 }
 
 /* Form */

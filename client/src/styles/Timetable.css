@@ -124,5 +124,9 @@
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+    flex-grow: 0;
+  }
+  .courses-list {
+    display: flex;
   }
 }
